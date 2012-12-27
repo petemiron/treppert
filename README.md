@@ -9,8 +9,8 @@ uses trello to create a listing of:
 depends on
 ==========
 
-Python 2.7
-trollop [which depends on requests]
+- Python 2.7
+- [trollop](https://bitbucket.org/pmiron/trollop)
 
 usage
 =====
