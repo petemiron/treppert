@@ -4,12 +4,16 @@ from datetime import datetime
 
 #####################################################################
 # uses trello to create a listing of:
+# - simple display of all cards on a board.
 # - in progress without due dates.
 # - people without in progress assigments.
 #####################################################################
 ARGS = None
 
 def lists():
+    """
+    List all lists and cards for a single trello board.
+    """
     conn = trollop.TrelloConnection(ARGS.trello_dev_key, ARGS.trello_user_token)
     # for each of your boards, find the one that matches.
     board_id = get_id_for_name(conn.me.boards, ARGS.board_name)
@@ -25,6 +29,9 @@ def lists():
                 print "--", card.name, due_date 
 
 def no_dates():
+    """
+    List all cards and the associated members that don't have due dates.
+    """
     # find everything on a given board:list that doesn't have a due date.
     # print out the members of that card.
     conn = trollop.TrelloConnection(ARGS.trello_dev_key, ARGS.trello_user_token)
@@ -39,8 +46,34 @@ def no_dates():
                     print "-- ", member.username, member.fullname, member.url
 
 def no_cards():
-    print "asked for no_cards"
-    print args
+    """
+    List all users with no cards assigned to them for the specified list.
+    """
+    # create two sets.
+    # - members on cards in specified list.
+    # - all members of board.
+    board_members = {} 
+    list_card_members = {} 
+    
+    conn = trollop.TrelloConnection(ARGS.trello_dev_key, ARGS.trello_user_token)
+    board_id = get_id_for_name(conn.me.boards, ARGS.board_name)
+    board = conn.get_board(board_id)
+    
+    for member in board.members:
+        board_members[member._id] = member
+
+    list_id = get_id_for_name(board.lists, ARGS.list_name)
+    list = conn.get_list(list_id)
+    for card in list.cards:
+        if (card.closed is False):
+            for member in card.members:
+                list_card_members[member._id] = member
+
+    not_in_list = set(board_members.keys()).difference(set(list_card_members.keys()))
+    
+    for member_id in not_in_list:
+        member = board_members[member_id]
+        print member.username, member.fullname
 
 # convenience method for finding an
 # id by name from trello api.
