@@ -4,8 +4,8 @@ treppert
 uses trello to create a listing of:
 
 - simple display of all cards on a board.
-- cards without due dates.
-- members of board without in cards in a specific list.
+- cards without due dates in a list.
+- members of board without cards in a specific list.
 
 depends on
 ==========
