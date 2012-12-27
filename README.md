@@ -22,8 +22,8 @@ usage
     useful, simple, cmd-based reports from trello.
 
     positional arguments:
-        trello_dev_key        Your dev key the trello API
-        trello_user_token     Your user token for the trello API
+        trello_dev_key        [Your dev key the trello API](https://trello.com/1/appKey/generate)
+        trello_user_token     [Your user token for the trello API](https://trello.com/docs/gettingstarted/index.html#getting-a-token-from-a-user)
         board_name            The board to list
             {no_cards,lists,no_dates} 
             show the lists on a board, show all cards with no dates, show all users with no cards.
