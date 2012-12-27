@@ -5,8 +5,8 @@ from datetime import datetime
 #####################################################################
 # uses trello to create a listing of:
 # - simple display of all cards on a board.
-# - in progress without due dates.
-# - people without in progress assigments.
+# - cards without due dates.
+# - members of board without in cards in a specific list.
 #####################################################################
 ARGS = None
 
