@@ -26,7 +26,7 @@ def lists():
                     due_date = card.due
                 else:
                     due_date = "no due date"
-                print "--", card.name, due_date 
+                print "--", card.name, due_date, card.url 
 
 def no_dates():
     """
